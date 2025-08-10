@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mi Portfolio – Carlos Rojas</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── VARIABLES ───────────────────────────────────────────────────────── */
+    :root {
+      --color-primary: #61dafb;
+      --color-secondary: #9ea7ad;
+      --color-bg: #1e1e1e;
+      --color-card-bg: rgba(40, 40, 40, 0.9);
+      --color-text-light: #e0e0e0;
+      --color-text-dark: #a0a0a0;
+      --radius: 8px;
+      --transition: 0.3s ease;
+      --font-console: 'JetBrains Mono', monospace;
+    }
+
+    /* ── GLOBAL SETUP ───────────────────────────────────────────────────── */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-console);
+      background: var(--color-bg);
+      color: var(--color-text-light);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── LANGUAGE SWITCHER ──────────────────────────────────────────────── */
+    .lang-switcher {
+      position: fixed;
+      top: 1rem;
+      left: 2rem;
+      z-index: 1000;
+      background: rgba(30, 30, 30, 0.85);
+      padding: 0.25rem 0.5rem;
+      border-radius: var(--radius);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+
+    .lang-switcher button {
+      background: none;
+      border: none;
+      color: var(--color-text-light);
+      font-family: var(--font-console);
+      font-weight: 700;
+      cursor: pointer;
+      margin: 0 0.25rem;
+      transition: color var(--transition);
+    }
+
+    .lang-switcher button.active,
+    .lang-switcher button:hover {
+      color: var(--color-primary);
+    }
+
+    /* ── NAVBAR ───────────────────────────────────────────────────────── */
+    .navbar {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      backdrop-filter: blur(8px);
+      background: rgba(30,30,30,0.8);
+      z-index: 500;
+    }
+
+    .logo {
+      font-family: var(--font-console);
+      font-weight: 700;
+      font-size: 1.75rem;
+      color: var(--color-primary);
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      position: relative;
+      text-decoration: none;
+      color: var(--color-text-light);
+      font-family: var(--font-console);
+      font-weight: 500;
+      transition: color var(--transition);
+      cursor: pointer;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: var(--color-primary);
+      bottom: -4px;
+      left: 0;
+      transition: width var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--color-primary);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* ── HERO ──────────────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+      /* Agregar imagen de fondo */
+      background-image: url('images/banner1.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(97, 218, 251, 0.1) 0%, transparent 70%);
+      /* Agregar overlay oscuro para mejor legibilidad del texto */
+      background: linear-gradient(135deg, rgba(30, 30, 30, 0.8) 0%, rgba(42, 42, 42, 0.8) 100%);
+    }
+
+    .hero-text {
+      position: relative;
+      text-align: center;
+      color: var(--color-text-light);
+      padding: 3rem;
+      backdrop-filter: blur(6px);
+      background: rgba(20,20,20,0.5);
+      border-radius: var(--radius);
+      animation: fadeIn 1s ease forwards;
+      border: 1px solid rgba(97, 218, 251, 0.3);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-text h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--color-primary);
+      text-shadow: 0 0 20px rgba(97, 218, 251, 0.5);
+    }
+
+    .hero-text p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      color: var(--color-text-dark);
+    }
+
+    /* ── BUTTON ───────────────────────────────────────────────────────── */
+    .btn {
+      position: relative;
+      display: inline-block;
+      padding: 1rem 2rem;
+      font-family: var(--font-console);
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--color-text-light);
+      background: var(--color-primary);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform var(--transition);
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 4px 15px rgba(97, 218, 251, 0.3);
+    }
+
+    .btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.15);
+      transform: scale(0);
+      transition: transform var(--transition);
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(97, 218, 251, 0.4);
+    }
+
+    .btn:hover::after {
+      transform: scale(1);
+    }
+
+    /* ── MODAL STYLES ────────────────────────────────────────────────── */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+    }
+
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: modalFadeIn 0.3s ease;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-content {
+      background: var(--color-card-bg);
+      margin: 2rem;
+      padding: 2rem;
+      border-radius: var(--radius);
+      width: 90%;
+      max-width: 600px;
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+      animation: modalSlideIn 0.3s ease;
+      border: 1px solid rgba(97, 218, 251, 0.3);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+    }
+
+    @keyframes modalSlideIn {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 2rem;
+      color: var(--color-text-light);
+      cursor: pointer;
+      transition: color var(--transition);
+      font-family: var(--font-console);
+    }
+
+    .modal-close:hover {
+      color: var(--color-primary);
+    }
+
+    .modal h2 {
+      color: var(--color-primary);
+      margin-bottom: 1.5rem;
+      font-family: var(--font-console);
+      font-size: 2rem;
+    }
+
+    .modal p {
+      color: var(--color-text-light);
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .card {
+      background: rgba(60, 60, 60, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      margin-bottom: 1.5rem;
+      transition: transform var(--transition);
+      border: 1px solid rgba(97, 218, 251, 0.2);
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.7);
+    }
+
+    .card h3 {
+      font-family: var(--font-console);
+      margin-bottom: 0.5rem;
+      color: var(--color-primary);
+    }
+
+    .card span {
+      font-family: var(--font-console);
+      display: block;
+      font-size: 0.875rem;
+      color: var(--color-secondary);
+      margin-bottom: 0.75rem;
+    }
+
+    .card p {
+      color: var(--color-text-light);
+      margin: 0;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .hero-text h1 {
+        font-size: 2rem;
+      }
+
+      .modal-content {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+    }
+
+    /* ── SCROLLBAR ───────────────────────────────────────────────────── */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--color-bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--color-primary);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #4fc3f7;
+    }
+</style>
+  <style>
+    /* Addictive mouse trail */
+    .mouse-trail {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: var(--color-primary);
+      border-radius: 50%;
+      pointer-events: none;
+      mix-blend-mode: lighten;
+      animation: trail-fade 0.5s forwards;
+    }
+    @keyframes trail-fade {
+      0% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(4); }
+    }
+
+    /* Addictive code-character fade */
+    @keyframes char-fade {
+      0% { opacity: 1; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-20px) scale(1.5); }
+    }
+    .code-trail {
+      position: absolute;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 24px;
+      color: green;
+      pointer-events: none;
+      white-space: pre;
+      animation: char-fade 3s forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Language Switcher -->
+  <div class="lang-switcher">
+    <button id="lang-es" class="active">ES</button> | <button id="lang-en">EN</button>
+  </div>
+
+  <!-- Spanish version -->
+  <div class="lang" data-lang="es">
+    <header class="hero" id="home">
+      <nav class="navbar">
+        <div class="logo">Carlos Rojas</div>
+        <ul class="nav-links">
+          <li><a href="#home">Inicio</a></li>
+          <li><a href="#about" data-modal="about-modal">Sobre mí</a></li>
+          <li><a href="#experience" data-modal="experience-modal">Experiencia</a></li>
+          <li><a href="#projects" data-modal="projects-modal">Proyectos</a></li>
+          <li><a href="#research" data-modal="research-modal">Investigación</a></li>
+          <li><a href="#blog" data-modal="blog-modal">Blog</a></li>
+          <li><a href="#contact" data-modal="contact-modal">Contacto</a></li>
+        </ul>
+      </nav>
+      <div class="hero-text">
+        <h1>Bienvenido a Mi Portafolio</h1>
+        <p>Hola, soy Carlos Rojas, apasionado por la economía, la tecnología y la innovación.</p>
+        <button class="btn" data-modal="contact-modal">Contáctame</button>
+      </div>
+    </header>
+
+    <!-- Modales en Español -->
+    <div id="about-modal" class="modal">
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <h2>Sobre mí</h2>
+        <p>
+          Soy un estudiante de secundaria peruano con foco en economía y emprendimiento. 
+          Mi pasión por entender cómo funcionan los mercados y la economía me ha llevado a 
+          profundizar en el estudio de la microeconomía y las políticas monetarias.
+        </p>
+        <p>
+          Además de mi interés académico, tengo experiencia en desarrollo web y me gusta 
+          crear proyectos innovadores que combinen tecnología con soluciones prácticas. 
+          He trabajado con Python, APIs de inteligencia artificial y desarrollo frontend.
+        </p>
+        <p>
+          En mi tiempo libre disfruto del tenis, que me ayuda a mantener un equilibrio 
+          entre lo académico y lo físico. También soy un ávido lector de filosofía, 
+          especialmente obras que exploran la intersección entre ética, economía y sociedad.
+        </p>
+        <p>
+          Mi objetivo es continuar mi formación en economía a nivel universitario y 
+          eventualmente contribuir al desarrollo económico del Perú a través de la 
+          investigación y políticas públicas innovadoras.
+        </p>
+        <div class="card">
+          <h3>Email</h3>
+          <p>
+            <a href="mailto:contact.carlosrojas@gmail.com" style="color: var(--color-primary);">
+              contact.carlosrojas@gmail.com
+            </a>
+          </p>
+        </div>
+        <div class="card">
+          <h3>LinkedIn</h3>
+          <p>Próximamente Disponible</p>
+        </div>
+        <div class="card">
+          <h3>Disponibilidad</h3>
+          <p>
+            Actualmente estudiando en Harvard Summer School Program. Respondo emails regularmente y estoy abierto a conversaciones sobre economía, tecnología y oportunidades futuras.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Language switching functionality
+    const setLang = lang => {
+      document.documentElement.lang = lang;
+      document.querySelectorAll('.lang').forEach(el => {
+        el.style.display = el.dataset.lang === lang ? 'block' : 'none';
+      });
+      document.querySelectorAll('#lang-es, #lang-en').forEach(btn => {
+        btn.classList.toggle('active', btn.id === 'lang-' + lang);
+      });
+      // Store language preference in memory (not localStorage)
+      window.currentLang = lang;
+    };
+
+    document.getElementById('lang-es').addEventListener('click', () => setLang('es'));
+    document.getElementById('lang-en').addEventListener('click', () => setLang('en'));
+    
+    // Initialize with Spanish
+    setLang('es');
+
+    // Modal functionality
+    function openModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeModal(modal) {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Event listeners for modal triggers
+    document.addEventListener('click', (e) => {
+      const modalTrigger = e.target.closest('[data-modal]');
+      if (modalTrigger) {
+        e.preventDefault();
+        const modalId = modalTrigger.getAttribute('data-modal');
+        openModal(modalId);
+      }
+
+      // Close modal when clicking close button
+      if (e.target.classList.contains('modal-close')) {
+        const modal = e.target.closest('.modal');
+        closeModal(modal);
+      }
+
+      // Close modal when clicking outside content
+      if (e.target.classList.contains('modal')) {
+        closeModal(e.target);
+      }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const activeModal = document.querySelector('.modal.active');
+        if (activeModal) {
+          closeModal(activeModal);
+        }
+      }
+    });
+
+    // Smooth scrolling for home link
+    document.addEventListener('click', (e) => {
+      if (e.target.getAttribute('href') === '#home') {
+        e.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }
+    });
+
+    // Add some interactive effects
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-3px) scale(1.02)';
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0) scale(1)';
+      });
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.style.background = 'rgba(30,30,30,0.95)';
+        navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.5)';
+      } else {
+        navbar.style.background = 'rgba(30,30,30,0.8)';
+        navbar.style.boxShadow = 'none';
+      }
+    });
+
+    // Add typing effect to hero text
+    function typeWriter(element, text, speed = 100) {
+      let i = 0;
+      element.innerHTML = '';
+      
+      function type() {
+        if (i < text.length) {
+          element.innerHTML += text.charAt(i);
+          i++;
+          setTimeout(type, speed);
+        }
+      }
+      
+      type();
+    }
+
+    // Initialize typing effect after page load
+    window.addEventListener('load', () => {
+      const heroTitle = document.querySelector('.hero-text h1');
+      const heroSubtitle = document.querySelector('.hero-text p');
+      
+      if (heroTitle && heroSubtitle) {
+        const currentLang = window.currentLang || 'es';
+        const titles = {
+          es: 'Bienvenido a Mi Portafolio',
+          en: 'Welcome to My Portfolio'
+        };
+        const subtitles = {
+          es: 'Hola, soy Carlos Rojas, apasionado por la economía, la tecnología y la innovación.',
+          en: 'Hi, I\'m Carlos Rojas, passionate about economics, technology and innovation.'
+        };
+        
+        setTimeout(() => {
+          typeWriter(heroTitle, titles[currentLang], 80);
+        }, 500);
+        
+        setTimeout(() => {
+          typeWriter(heroSubtitle, subtitles[currentLang], 50);
+        }, 2000);
+      }
+    });
+
+    // Add particle effect to background
+    function createParticles() {
+      const hero = document.querySelector('.hero');
+      const particleCount = 50;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.style.position = 'absolute';
+        particle.style.width = '2px';
+        particle.style.height = '2px';
+        particle.style.background = 'rgba(97, 218, 251, 0.3)';
+        particle.style.borderRadius = '50%';
+        particle.style.pointerEvents = 'none';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animation = `float ${3 + Math.random() * 4}s ease-in-out infinite`;
+        
+        hero.appendChild(particle);
+      }
+    }
+
+    // Add CSS animation for particles
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes float {
+        0%, 100% { 
+          transform: translateY(0) rotate(0deg); 
+          opacity: 0.3; 
+        }
+        50% { 
+          transform: translateY(-20px) rotate(180deg); 
+          opacity: 0.8; 
+        }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Initialize particles
+    createParticles();
+
+    // Add glow effect to buttons on hover
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('mouseenter', () => {
+        btn.style.boxShadow = '0 0 30px rgba(97, 218, 251, 0.6)';
+      });
+      
+      btn.addEventListener('mouseleave', () => {
+        btn.style.boxShadow = '0 4px 15px rgba(97, 218, 251, 0.3)';
+      });
+    });
+
+    // Add fading dot trail for mouse movements
+
+    // Throttle code-character trail frequency
+    let lastCharTrail = 0;
+    const charTrailInterval = 50; // milliseconds between characters
+
+    // Add fading code-character trail on mouse move
+    const codeChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789(){}[];=+-*/%<>;';
+    document.addEventListener('mousemove', e => {
+      const now = performance.now();
+      if (now - lastCharTrail < charTrailInterval) return;
+      lastCharTrail = now;
+      const span = document.createElement('span');
+      span.className = 'code-trail';
+      span.textContent = codeChars.charAt(Math.floor(Math.random() * codeChars.length));
+      span.style.left = e.pageX + 'px';
+      span.style.top  = e.pageY + 'px';
+      document.body.appendChild(span);
+      span.addEventListener('animationend', () => span.remove());
+    });
+  </script>
+</body>
+</html>
+        </p>
+      </div>
+    </div>
+
+    <div id="experience-modal" class="modal">
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <h2>Experiencia</h2>
+        <div class="card">
+          <h3>Participante Harvard Summer School Program</h3>
+          <span>Junio 2025 – Presente</span>
+          <p>
+            Actualmente cursando Principles of Economics: Microeconomics and Macroeconomics 
+            en el prestigioso programa de verano de Harvard. Esta experiencia intensiva 
+            me permite profundizar en teorías económicas fundamentales y aplicarlas a 
+            casos del mundo real.
+          </p>
+          <p>
+            El programa incluye análisis de mercados, políticas fiscales, teoría monetaria 
+            y econometría básica. También participo en debates sobre políticas económicas 
+            contemporáneas y su impacto global.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Desarrollador Web Freelance</h3>
+          <span>2024 – Presente</span>
+          <p>
+            Desarrollo sitios web y aplicaciones utilizando HTML, CSS, JavaScript y Python. 
+            He creado soluciones para pequeñas empresas locales y proyectos personales.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Investigador Junior</h3>
+          <span>2024</span>
+          <p>
+            Investigación independiente sobre políticas monetarias peruanas y su efectividad 
+            en el control de la inflación durante el período 1996-2024.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="projects-modal" class="modal">
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <h2>Proyectos</h2>
+        <div class="card">
+          <h3>Sistema de Flashcards con IA</h3>
+          <p>
+            Aplicación desarrollada en Python que utiliza APIs de procesamiento de lenguaje 
+            natural para generar automáticamente preguntas y respuestas de estudio. 
+            El sistema incluye:
+          </p>
+          <ul style="color: var(--color-text-light); margin-left: 1.5rem; margin-top: 0.5rem;">
+            <li>Generación automática de preguntas basadas en texto</li>
+            <li>Sistema de puntuación inteligente</li>
+            <li>Seguimiento de progreso de aprendizaje</li>
+            <li>Interfaz de usuario intuitiva</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Análisis de Mercados Peruanos</h3>
+          <p>
+            Dashboard interactivo que visualiza datos económicos del Perú, incluyendo 
+            indicadores de inflación, crecimiento del PIB y políticas monetarias. 
+            Utiliza Python, Pandas y bibliotecas de visualización.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Portfolio Personal</h3>
+          <p>
+            Sitio web personal desarrollado con HTML, CSS y JavaScript, incluyendo 
+            funcionalidades como cambio de idioma, ventanas modales y diseño responsive.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="research-modal" class="modal">
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <h2>Investigación</h2>
+        <div class="card">
+          <h3>Estrategias de Inflación y Políticas Monetarias en el Perú (1996-2024)</h3>
+          <p>
+            Investigación en curso que analiza la efectividad de las políticas monetarias 
+            implementadas por el Banco Central de Reserva del Perú en las últimas tres décadas.
+          </p>
+          <p><strong>Objetivos principales:</strong></p>
+          <ul style="color: var(--color-text-light); margin-left: 1.5rem; margin-top: 0.5rem;">
+            <li>Evaluar la efectividad del régimen de metas de inflación</li>
+            <li>Analizar el impacto de choques externos en la política monetaria</li>
+            <li>Proponer mejoras para la estabilidad macroeconómica</li>
+          </ul>
+          <p><strong>Metodología:</strong> Análisis econométrico de series temporales, 
+          revisión de literatura académica y entrevistas con expertos del sector.</p>
+        </div>
+        <div class="card">
+          <h3>Microeconomía Aplicada al Sector Tecnológico</h3>
+          <p>
+            Estudio sobre cómo los principios microeconómicos se aplican en el 
+            ecosistema tecnológico peruano, con enfoque en startups y competencia de mercado.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="blog-modal" class="modal">
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <h2>Blog</h2>
+        <p>
+          Próximamente estaré compartiendo artículos sobre diversos temas que me apasionan:
+        </p>
+        <div class="card">
+          <h3>Economía Peruana</h3>
+          <p>
+            Análisis de coyuntura económica, políticas fiscales y monetarias, 
+            y su impacto en el desarrollo del país.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Inversión y Mercados</h3>
+          <p>
+            Guías para jóvenes inversionistas, análisis de mercados emergentes 
+            y estrategias de inversión a largo plazo.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Tecnología e Innovación</h3>
+          <p>
+            Tendencias tecnológicas, desarrollo de software y el impacto de la 
+            IA en la economía moderna.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Filosofía Económica</h3>
+          <p>
+            Reflexiones sobre la intersección entre ética, filosofía y economía, 
+            explorando diferentes escuelas de pensamiento económico.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="contact-modal" class="modal">
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <h2>Contacto</h2>
+        <p>
+          ¡Me encantaría conectar contigo! Ya sea para discutir proyectos, 
+          oportunidades de colaboración o simplemente para intercambiar ideas 
+          sobre economía y tecnología.
+        </p>
+        <div class="card">
+          <h3>Email</h3>
+          <p>
+            <a href="mailto:contact.carlosrojas@gmail.com" style="color: var(--color-primary);">
+              contact.carlosrojas@gmail.com
+            </a>
+          </p>
+        </div>
+        <div class="card">
+          <h3>LinkedIn</h3>
+          <p>Próximamente disponible</p>
+        </div>
+        <div class="card">
+          <h3>Disponibilidad</h3>
+          <p>
+            Actualmente estudiando en Harvard Summer School Program. 
+            Respondo emails regularmente y estoy abierto a conversaciones 
+            sobre economía, tecnología y oportunidades futuras.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- English version -->
+  <div class="lang" data-lang="en" style="display: none;">
+    <header class="hero" id="home">
+      <nav class="navbar">
+        <div class="logo">Carlos Rojas</div>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about" data-modal="about-modal-en">About</a></li>
+          <li><a href="#experience" data-modal="experience-modal-en">Experience</a></li>
+          <li><a href="#projects" data-modal="projects-modal-en">Projects</a></li>
+          <li><a href="#research" data-modal="research-modal-en">Research</a></li>
+          <li><a href="#blog" data-modal="blog-modal-en">Blog</a></li>
+          <li><a href="#contact" data-modal="contact-modal-en">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="hero-text">
+        <h1>Welcome to My Portfolio</h1>
+        <p>Hi, I'm Carlos Rojas, passionate about economics, technology and innovation.</p>
+        <button class="btn" data-modal="contact-modal-en">Contact Me</button>
+      </div>
+    </header>
+
+    <!-- English Modals -->
+    <div id="about-modal-en" class="modal">
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <h2>About Me</h2>
+        <p>
+          I am a peruvian high school student focused on economics and entrepreneurship. 
+          My passion for understanding how markets and economy work has led me to 
+          deepen my study of microeconomics and monetary policies.
+        </p>
+        <p>
+          Besides my academic interest, I have experience in web development and enjoy 
+          creating innovative projects that combine technology with practical solutions. 
+          I have worked with Python, AI APIs and frontend development.
+        </p>
+        <p>
+          In my spare time I enjoy playing tennis, which helps me maintain a balance 
+          between academic and physical activities. I am also an avid reader of philosophy, 
+          especially works that explore the intersection between ethics, economics and society.
+        </p>
+        <p>
+          My goal is to continue my education in economics at university level and 
+          eventually contribute to Peru's economic development through research and 
+          innovative public policies.
+        </p>
+      </div>
+    </div>
+
+    <div id="experience-modal-en" class="modal">
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <h2>Experience</h2>
+        <div class="card">
+          <h3>Harvard Summer School Program Participant</h3>
+          <span>June 2025 – Present</span>
+          <p>
+            Currently studying Principles of Economics: Microeconomics and Macroeconomics 
+            at Harvard's prestigious summer program. This intensive experience allows me 
+            to deepen fundamental economic theories and apply them to real-world cases.
+          </p>
+          <p>
+            The program includes market analysis, fiscal policies, monetary theory 
+            and basic econometrics. I also participate in debates about contemporary 
+            economic policies and their global impact.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Freelance Web Developer</h3>
+          <span>2024 – Present</span>
+          <p>
+            Developing websites and applications using HTML, CSS, JavaScript and Python. 
+            I have created solutions for local small businesses and personal projects.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Junior Researcher</h3>
+          <span>2024</span>
+          <p>
+            Independent research on Peruvian monetary policies and their effectiveness 
+            in inflation control during the 1996-2024 period.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="projects-modal-en" class="modal">
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <h2>Projects</h2>
+        <div class="card">
+          <h3>AI Flashcards System</h3>
+          <p>
+            Application developed in Python that uses natural language processing APIs 
+            to automatically generate study questions and answers. The system includes:
+          </p>
+          <ul style="color: var(--color-text-light); margin-left: 1.5rem; margin-top: 0.5rem;">
+            <li>Automatic question generation based on text</li>
+            <li>Intelligent scoring system</li>
+            <li>Learning progress tracking</li>
+            <li>Intuitive user interface</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Peruvian Markets Analysis</h3>
+          <p>
+            Interactive dashboard that visualizes Peru's economic data, including 
+            inflation indicators, GDP growth and monetary policies. 
+            Uses Python, Pandas and visualization libraries.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Personal Portfolio</h3>
+          <p>
+            Personal website developed with HTML, CSS and JavaScript, including 
+            functionalities like language switching, modal windows and responsive design.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="research-modal-en" class="modal">
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <h2>Research</h2>
+        <div class="card">
+          <h3>Inflation Strategies and Monetary Policies in Peru (1996-2024)</h3>
+          <p>
+            Ongoing research analyzing the effectiveness of monetary policies 
+            implemented by Peru's Central Reserve Bank over the last three decades.
+          </p>
+          <p><strong>Main objectives:</strong></p>
+          <ul style="color: var(--color-text-light); margin-left: 1.5rem; margin-top: 0.5rem;">
+            <li>Evaluate the effectiveness of inflation targeting regime</li>
+            <li>Analyze the impact of external shocks on monetary policy</li>
+            <li>Propose improvements for macroeconomic stability</li>
+          </ul>
+          <p><strong>Methodology:</strong> Econometric analysis of time series, 
+          academic literature review and interviews with sector experts.</p>
+        </div>
+        <div class="card">
+          <h3>Microeconomics Applied to Technology Sector</h3>
+          <p>
+            Study on how microeconomic principles apply to Peru's technology 
+            ecosystem, focusing on startups and market competition.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="blog-modal-en" class="modal">
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <h2>Blog</h2>
+        <p>
+          Coming soon, I will be sharing articles on various topics I'm passionate about:
+        </p>
+        <div class="card">
+          <h3>Peruvian Economy</h3>
+          <p>
+            Economic conjuncture analysis, fiscal and monetary policies, 
+            and their impact on the country's development.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Investment and Markets</h3>
+          <p>
+            Guides for young investors, emerging market analysis 
+            and long-term investment strategies.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Technology and Innovation</h3>
+          <p>
+            Technology trends, software development and AI's impact 
+            on modern economy.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Economic Philosophy</h3>
+          <p>
+            Reflections on the intersection between ethics, philosophy and economics, 
+            exploring different schools of economic thought.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="contact-modal-en" class="modal">
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <h2>Contact</h2>
+        <p>I'd love to connect with you! Whether it's to discuss projects,
+collaboration opportunities, or simply to exchange ideas
+about economics and technology. </p>
+        <div class="card">
+          <h3>Email</h3>
+          <p>
+            <a href="mailto:contact.carlosrojas@gmail.com" style="color: var(--color-primary);">
+              contact.carlosrojas@gmail.com
+            </a>
+          </p>
+        </div>
+        <div class="card">
+          <h3>LinkedIn</h3>
+          <p>LinkedIn: Coming soon.
+</p>
+        </div>
+        <div class="card">
+          <h3>Availability</h3>
+          <p>
+            Currently studying at the Harvard Summer School Program. I regularly check my emails and am open to conversations about economics, technology, and future opportunities.

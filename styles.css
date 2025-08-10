@@ -1,0 +1,285 @@
+/* ── IMPORT CODE-STYLE FONT (PyCharm-like) ───────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+:root {
+  /* Theme variables – Dark & discrete */
+  --color-primary:    #61dafb;           /* Accent */
+  --color-secondary:  #9ea7ad;           /* Subtle text */
+  --color-bg:         #1e1e1e;           /* Page background */
+  --color-card-bg:    rgba(40, 40, 40, 0.8); /* Card backgrounds */
+  --color-text-light: #e0e0e0;           /* Main text */
+  --color-text-dark:  #a0a0a0;           /* Secondary text */
+  --radius:           8px;
+  --transition:       0.3s ease;
+
+  /* Code-style font */
+  --font-console: 'JetBrains Mono', monospace;
+}
+
+/* ── GLOBAL SETUP ───────────────────────────────────────────────────────── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+body {
+  font-family: var(--font-console);
+  background: var(--color-bg);
+  color: var(--color-text-light);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── LANGUAGE SWITCHER ──────────────────────────────────────────────────── */
+.lang-switcher {
+  position: fixed;
+  top: 1rem;
+  left: 2rem;
+  z-index: 1000;
+  background: rgba(30, 30, 30, 0.85);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+.lang-switcher button {
+  background: none;
+  border: none;
+  color: var(--color-text-light);
+  font-family: var(--font-console);
+  font-weight: 700;
+  cursor: pointer;
+  margin: 0 0.25rem;
+  transition: color var(--transition);
+}
+.lang-switcher button.active,
+.lang-switcher button:hover {
+  color: var(--color-primary);
+}
+
+/* ── NAVBAR ───────────────────────────────────────────────────────────── */
+.navbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  backdrop-filter: blur(8px);
+  background: rgba(30,30,30,0.8);
+  z-index: 500;
+}
+.logo {
+  font-family: var(--font-console);
+  font-weight: 700;
+  font-size: 1.75rem;
+  color: var(--color-primary);
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+.nav-links a {
+  position: relative;
+  text-decoration: none;
+  color: var(--color-text-light);
+  font-family: var(--font-console);
+  font-weight: 500;
+  transition: color var(--transition);
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: var(--color-primary);
+  bottom: -4px;
+  left: 0;
+  transition: width var(--transition);
+}
+.nav-links a:hover {
+  color: var(--color-primary);
+}
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* ── HERO ──────────────────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* banner como fondo, ajusta la ruta si tu archivo es .jpeg */
+  background: url('../images/banner.jpeg') no-repeat center/cover;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(30,30,30,0.6);
+}
+.hero-text {
+  position: relative;
+  text-align: center;
+  color: var(--color-text-light);
+  padding: 2rem;
+  backdrop-filter: blur(6px);
+  background: rgba(20,20,20,0.5);
+  border-radius: var(--radius);
+  animation: fadeIn 1s ease forwards;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-text h1 {
+  font-size: 2.75rem;
+  margin-bottom: 1rem;
+  color: var(--color-primary);
+}
+.hero-text p {
+  font-size: 1.125rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-text-dark);
+}
+
+/* ── BUTTON ───────────────────────────────────────────────────────────── */
+.btn {
+  position: relative;
+  display: inline-block;
+  padding: 0.75rem 1.75rem;
+  font-family: var(--font-console);
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--color-text-light);
+  background: var(--color-primary);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: transform var(--transition);
+}
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.15);
+  transform: scale(0);
+  transition: transform var(--transition);
+}
+.btn:hover {
+  transform: scale(1.05);
+}
+.btn:hover::after {
+  transform: scale(1);
+}
+
+/* ── SECTIONS ────────────────────────────────────────────────────────── */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 4rem 1rem;
+}
+section {
+  margin-bottom: 4rem;
+}
+section h2 {
+  font-family: var(--font-console);
+  font-size: 2.25rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: var(--color-primary);
+}
+section p {
+  font-family: var(--font-console);
+  max-width: 800px;
+  margin: 0.5rem auto 1rem;
+  text-align: center;
+  color: var(--color-text-light);
+}
+
+/* ── CARDS ───────────────────────────────────────────────────────────── */
+.card {
+  background: var(--color-card-bg);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+  margin-bottom: 1.5rem;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.7);
+}
+.card h3 {
+  font-family: var(--font-console);
+  margin-bottom: 0.5rem;
+  color: var(--color-text-light);
+}
+.card span {
+  font-family: var(--font-console);
+  display: block;
+  font-size: 0.875rem;
+  color: var(--color-secondary);
+  margin-bottom: 0.75rem;
+}
+
+/* ── FOOTER ──────────────────────────────────────────────────────────── */
+footer {
+  background: #111;
+  color: var(--color-text-light);
+  text-align: center;
+  padding: 2rem 1rem;
+}
+footer .socials img {
+  width: 28px;
+  height: 28px;
+  margin: 0 0.5rem;
+  filter: invert(1);
+  transition: transform var(--transition);
+}
+footer .socials img:hover {
+  transform: scale(1.1);
+}
+.banner-images {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.banner-img {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.5s;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.banner-img.active {
+  opacity: 0.55;   /* Ajusta la opacidad si lo ves muy fuerte */
+  z-index: 1;
+}
+
+/* ─── Addictive mouse trail fade-out ───────────────────────────────── */
+@keyframes trail-fade {
+  0%   { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(4); }
+}
+
+.mouse-trail {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--color-primary);
+  border-radius: 50%;
+  pointer-events: none;
+  mix-blend-mode: lighten;
+  /* fade-out over 0.6s */
+  animation: trail-fade 0.6s forwards;
+}
