@@ -114,7 +114,7 @@ body {
   align-items: center;
   justify-content: center;
   /* banner como fondo, ajusta la ruta si tu archivo es .jpeg */
-  background: url('../images/banner.jpeg') no-repeat center/cover;
+  background: url('banner1.jpg') no-repeat center/cover;
 }
 .hero::before {
   content: '';
